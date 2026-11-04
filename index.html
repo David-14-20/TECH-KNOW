@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10243a">
+    <meta name="description" content="Tech-Know is a course and learning hub for MIVA cybersecurity students.">
+    <title>Tech-Know | Student Learning Hub</title>
+    <link rel="icon" href="assets/tech-know-mark.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar page-width" aria-label="Main navigation">
+            <a class="brand" href="#home" aria-label="Tech-Know home">
+                <img class="brand-logo" src="assets/tech-know-logo.svg" alt="">
+            </a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#courses">Courses</a>
+                <a href="#materials">Materials</a>
+                <a href="#course-manager">My courses</a>
+                <a href="#announcements">Updates</a>
+                <a href="#labs">Practice labs</a>
+                <a href="#community">Community</a>
+                <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Switch colour theme">☾</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content page-width">
+                <p class="eyebrow">MIVA student learning hub</p>
+                <h1>Learn the systems.<br><span>Protect what matters.</span></h1>
+                <p class="hero-copy">A simple home for your semester courses, study materials, and cybersecurity learning journey.</p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#courses">Explore courses</a>
+                    <a class="button button-outline" href="#course-manager">Manage my courses</a>
+                </div>
+                <div class="hero-stats" aria-label="Semester summary">
+                    <div><strong id="hero-course-count">9</strong><span>starter courses</span></div>
+                    <div><strong id="hero-unit-count">20</strong><span>editable demo units</span></div>
+                    <div><strong>One hub</strong><span>for your learning</span></div>
+                </div>
+            </div>
+            <div class="hero-orbit orbit-one" aria-hidden="true"></div>
+            <div class="hero-orbit orbit-two" aria-hidden="true"></div>
+        </section>
+
+        <section class="section page-width" id="courses">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Your semester</p>
+                    <h2>Courses you are taking</h2>
+                    <p class="section-copy">Browse the editable starter catalogue. Confirm course units with your official semester guide.</p>
+                </div>
+                <div class="semester-pill"><span class="status-dot"></span> Semester 1</div>
+            </div>
+            <div class="course-grid" id="course-grid" aria-live="polite"></div>
+            <section class="course-details" id="course-details" hidden aria-live="polite">
+                <div>
+                    <p class="eyebrow" id="course-detail-code"></p>
+                    <h3 id="course-detail-title"></h3>
+                    <p id="course-detail-description"></p>
+                </div>
+                <button class="icon-button" type="button" id="close-course-details" aria-label="Close course overview">×</button>
+            </section>
+        </section>
+
+        <section class="materials-section" id="materials">
+            <div class="page-width section">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Study at your pace</p>
+                        <h2>Course materials</h2>
+                        <p class="section-copy">Download the course guides and study materials included with this project.</p>
+                    </div>
+                    <span class="materials-count" id="materials-count">0 PDFs available</span>
+                </div>
+                <div class="materials-grid" id="materials-grid"></div>
+            </div>
+        </section>
+
+        <section class="section page-width" id="course-manager">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Keep your semester organized</p>
+                    <h2>My course manager</h2>
+                    <p class="section-copy">Your course list is saved in this browser. Add a course, search your list, or remove one.</p>
+                </div>
+            </div>
+
+            <div class="manager-layout">
+                <div class="panel manager-panel">
+                    <h3>Add a course</h3>
+                    <form id="course-form">
+                        <label for="course-code">Course code</label>
+                        <input type="text" id="course-code" name="course-code" placeholder="e.g. COS 201" autocomplete="off" required maxlength="24">
+
+                        <label for="course-name">Course title</label>
+                        <input type="text" id="course-name" name="course-name" placeholder="e.g. Computer Programming I" required maxlength="100">
+
+                        <div class="form-row">
+                            <div>
+                                <label for="course-units">Credit units</label>
+                                <input type="number" id="course-units" name="course-units" placeholder="e.g. 3" min="1" step="1" required>
+                            </div>
+                            <div>
+                                <label for="course-category">Course type</label>
+                                <select id="course-category" name="course-category">
+                                    <option value="CORE">Core</option>
+                                    <option value="ELECTIVE">Elective</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="button button-primary button-full" type="submit">Add course</button>
+                        <p class="form-message" id="course-status" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+
+                <div class="panel list-panel">
+                    <div class="list-heading">
+                        <div>
+                            <h3>My courses</h3>
+                            <p><strong id="course-count">0</strong> courses <span class="separator">·</span> <strong id="total-units">0</strong> total units</p>
+                        </div>
+                    </div>
+
+                    <form class="search-form" id="search-form" role="search">
+                        <label class="visually-hidden" for="search-course">Search courses by code or title</label>
+                        <input type="search" id="search-course" placeholder="Search by course code or title">
+                        <button class="button button-dark" type="submit">Search</button>
+                    </form>
+                    <div class="manager-tools">
+                        <button class="button button-outline" type="button" id="export-courses">Save courses to file</button>
+                        <label class="button button-outline file-button" for="import-courses">Load courses from file</label>
+                        <input class="visually-hidden" type="file" id="import-courses" accept=".json,application/json">
+                    </div>
+                    <p class="search-message" id="search-message" role="status" aria-live="polite"></p>
+                    <ul class="course-list" id="my-course-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section page-width" id="announcements">
+            <div class="section-heading"><div><p class="eyebrow">Stay on track</p><h2>Announcements & deadlines</h2><p class="section-copy">Starter reminders are examples. Add current dates from your official course channels.</p></div></div>
+            <div class="announcement-grid" id="announcement-list"></div>
+        </section>
+
+        <section class="materials-section" id="labs">
+            <div class="page-width section"><div class="section-heading"><div><p class="eyebrow">Learn by doing</p><h2>Beginner cyber practice</h2><p class="section-copy">Safe, local learning activities. Use only systems and data you own or have permission to test.</p></div></div>
+            <div class="lab-grid" id="lab-list"></div>
+        </section>
+
+        <section class="community-section" id="community">
+            <div class="page-width community-content">
+                <div>
+                    <p class="eyebrow eyebrow-light">Learn together</p>
+                    <h2>Good ideas grow in community.</h2>
+                    <p>Use this space to share questions, study tips, and useful cybersecurity resources with fellow students.</p>
+                </div>
+                <div class="community-box"><form id="community-form"><label for="community-name">Display name</label><input id="community-name" maxlength="32" placeholder="e.g. Ada" required><label for="community-message">Share a question or study tip</label><textarea id="community-message" maxlength="400" rows="3" required></textarea><button class="button button-light" type="submit">Post to this browser</button><p class="community-note" id="community-status" role="status">Demo posts stay in this browser; they are not shared with other students.</p></form><div id="community-posts" class="community-posts" aria-live="polite"></div></div>
+            </div>
+        </section>
+
+        <section class="section page-width" id="admin">
+            <div class="section-heading"><div><p class="eyebrow">Content tools</p><h2>Local content editor</h2><p class="section-copy">Prototype tools for editing announcements in this browser. This static demo has no sign-in or server-side admin protection.</p></div></div>
+            <form id="announcement-form" class="panel admin-form"><label for="announcement-title">Announcement</label><input id="announcement-title" maxlength="90" placeholder="Short title" required><label for="announcement-body">Details</label><textarea id="announcement-body" rows="3" maxlength="300" placeholder="Add a reminder or deadline" required></textarea><label for="announcement-date">Date label</label><input id="announcement-date" maxlength="40" placeholder="e.g. Check course portal" required><button class="button button-primary" type="submit">Add announcement</button><p id="admin-status" role="status"></p></form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="page-width footer-content">
+            <a class="brand brand-footer" href="#home" aria-label="Tech-Know home"><img class="brand-logo" src="assets/tech-know-logo-light.svg" alt=""></a>
+            <p>Built for curious learners and future cybersecurity professionals.</p>
+            <p class="copyright">© 2026 Tech-Know</p>
+        </div>
+    </footer>
+</body>
+</html>
