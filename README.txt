@@ -2,11 +2,6 @@ TECH-KNOW — STUDENT LEARNING HUB
 ================================
 
 Run the site
-------------
-1. Extract this ZIP to a folder.
-2. Open a terminal in that folder and run: py -m http.server 8000
-   If Python is unavailable, use: npx http-server -p 8000
-3. Visit http://localhost:8000 in a browser. Stop the server with Ctrl+C.
 The site uses plain HTML, CSS, JavaScript, and localStorage; no installation or account is required.
 
 What is included
